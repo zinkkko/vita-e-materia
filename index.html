@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Vita e Materia</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Notizie di biologia, comportamento animale, piante, fisica e spazio spiegate in modo semplice, con numeri, metodi e fonti a portata di clic.">
+<meta name="description" content="Notizie di biologia, comportamento animale, piante, geologia, fisica e spazio spiegate in modo semplice, con numeri, metodi e fonti a portata di clic.">
+<meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0c10" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vita e Materia">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone/icona.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone/icona-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
@@ -16,7 +24,7 @@
 :root {
   --bg: #f3f4f6; --surface: #ffffff; --sunk: #e8eaee; --ink: #0c1015; --ink-2: #39404b; --muted: #636b78;
   --line: #dcdfe5; --line-strong: #c3c8d0;
-  --d-bio: #0d8560; --d-eto: #bb4c0d; --d-veg: #4a8513; --d-fis: #1c5cd2; --d-ast: #683dd3;
+  --d-bio: #0d8560; --d-eto: #bb4c0d; --d-veg: #4a8513; --d-geo: #b3245c; --d-fis: #1c5cd2; --d-ast: #683dd3;
   --focus: #1c5cd2; --su-foto: #ffffff; --velo: rgb(6 8 12 / .82);
   --ombra: 0 1px 2px rgb(12 16 21 / .05), 0 14px 34px -18px rgb(12 16 21 / .28);
   --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
@@ -31,7 +39,7 @@
   :root:not([data-theme="light"]) {
     --bg: #0a0c10; --surface: #12151b; --sunk: #1a1e26; --ink: #edeff3; --ink-2: #bac0ca; --muted: #8b93a0;
     --line: #232832; --line-strong: #363c48;
-    --d-bio: #3ccd9a; --d-eto: #ff9758; --d-veg: #9bd35c; --d-fis: #77a5ff; --d-ast: #aa8dff;
+    --d-bio: #3ccd9a; --d-eto: #ff9758; --d-veg: #9bd35c; --d-geo: #ff86b3; --d-fis: #77a5ff; --d-ast: #aa8dff;
     --focus: #77a5ff; --ombra: 0 1px 2px rgb(0 0 0 / .4), 0 16px 40px -18px rgb(0 0 0 / .7);
     color-scheme: dark;
   }
@@ -39,25 +47,26 @@
 :root[data-theme="dark"] {
   --bg: #0a0c10; --surface: #12151b; --sunk: #1a1e26; --ink: #edeff3; --ink-2: #bac0ca; --muted: #8b93a0;
   --line: #232832; --line-strong: #363c48;
-  --d-bio: #3ccd9a; --d-eto: #ff9758; --d-veg: #9bd35c; --d-fis: #77a5ff; --d-ast: #aa8dff;
+  --d-bio: #3ccd9a; --d-eto: #ff9758; --d-veg: #9bd35c; --d-geo: #ff86b3; --d-fis: #77a5ff; --d-ast: #aa8dff;
   --focus: #77a5ff; --ombra: 0 1px 2px rgb(0 0 0 / .4), 0 16px 40px -18px rgb(0 0 0 / .7);
   color-scheme: dark;
 }
-html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 140px); }
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 140px); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 html:has(dialog[open]) { overflow: hidden; }
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.55 var(--testo); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.55 var(--testo); -webkit-font-smoothing: antialiased; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 40; background: var(--bg); }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
+a, button { touch-action: manipulation; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .wrap { max-width: 1320px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
 
 /* ---------- testata ---------- */
-.testata { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: saturate(1.4) blur(18px); -webkit-backdrop-filter: saturate(1.4) blur(18px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.testata { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: saturate(1.4) blur(18px); -webkit-backdrop-filter: saturate(1.4) blur(18px); border-bottom: 1px solid transparent; transition: border-color .3s, transform .35s var(--ease); }
 .testata.scorsa { border-color: var(--line); }
 .testata-riga { display: flex; align-items: center; gap: 16px; padding-block: 12px 10px; }
 .marchio { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
@@ -193,7 +202,13 @@ button { font: inherit; color: inherit; }
 .etichetta.nuova { background: color-mix(in srgb, var(--tinta) 16%, transparent); color: var(--tinta); }
 .etichetta.vecchia { background: var(--sunk); color: var(--muted); }
 
-.materie { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.materie { display: grid; grid-template-columns: repeat(var(--col, 5), minmax(0, 1fr)); gap: 20px; }
+.materie[data-n="6"] { gap: 18px; }
+.materie[data-n="6"] .card h3 { font-size: 1rem; }
+@media (min-width: 1081px) and (max-width: 1240px) {
+  .materie[data-n="6"] { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 22px; }
+  .materie[data-n="6"] .card h3 { font-size: 1.1rem; }
+}
 .materie .card { padding-top: 14px; border-top: 3px solid var(--tinta); }
 .materie .card h3 { font-size: 1.05rem; }
 @media (max-width: 1080px) {
@@ -201,7 +216,6 @@ button { font: inherit; color: inherit; }
   .materie::-webkit-scrollbar { display: none; }
   .materie .card { scroll-snap-align: start; }
 }
-@media (max-width: 640px) { .materie { grid-auto-columns: 74%; } }
 
 .binario { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(260px, 310px); gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 4px 8px; margin: -4px; }
 .binario::-webkit-scrollbar { display: none; }
@@ -299,15 +313,58 @@ button { font: inherit; color: inherit; }
   .piede-in { grid-template-columns: minmax(0, 1fr); }
   .piede-in .agg { justify-self: start; text-align: left; }
 }
+@media (max-width: 820px) {
+  .testata.compatta { transform: translateY(calc(-1 * var(--riga, 64px))); }
+}
 @media (max-width: 640px) {
-  .testata-riga { gap: 10px; }
+  html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 70px); }
+  .testata-riga { gap: 8px; padding-block: 10px 8px; }
   .marchio b { display: none; }
-  .lead { min-height: 520px; }
+  .cerca input { height: 44px; font-size: 1rem; }
+  .icona { width: 44px; height: 44px; }
+  .chip { height: 40px; padding: 0 15px; font-size: .9375rem; }
+  .filtri { padding-block: 0 10px; margin-right: calc(-1 * var(--gutter-r)); padding-right: calc(var(--gutter-r) + 20px);
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+  .apertura { gap: 14px; padding-top: 6px; }
+  .lead { min-height: 460px; min-height: clamp(400px, 70svh, 540px); border-radius: 22px; }
+  .lead-testo { padding: 20px; gap: 12px; }
+  .lead h1 { font-size: clamp(1.7rem, 8vw, 2.1rem); line-height: 1.02; }
+  .lead-semplice { font-size: 1rem; line-height: 1.5; }
+  .leggi { align-self: stretch; justify-content: center; height: 48px; }
+  .lato { gap: 14px; }
+  .chi { padding: 20px; border-radius: 22px; }
+  .chi h2 { font-size: 1.45rem; }
+  .sezione { padding-top: 44px; }
+  .sezione-testa { margin-bottom: 18px; }
   .sezione-testa .frecce { display: none; }
-  .binario { grid-auto-columns: 78%; }
+  .materie, .binario { grid-auto-columns: 78%; gap: 16px; margin: 0 calc(-1 * var(--gutter-r)) 0 calc(-1 * var(--gutter-l)); padding: 0 var(--gutter-r) 8px var(--gutter-l); scroll-padding-inline: var(--gutter-l); }
+  .griglia { gap: 30px; }
+  .griglia .card .foto { aspect-ratio: 16 / 10; }
+  .card h3 { font-size: 1.25rem; }
+  .materie .card h3, .materie[data-n="6"] .card h3 { font-size: 1.1rem; }
+  .taccuino { border-radius: 22px; }
+  .tacc-azioni .btn { flex: 1 1 100%; order: 3; }
+  .tacc-azioni .pos { margin-left: 0; margin-right: auto; }
+  .altre .btn { width: 100%; min-height: 50px; }
   .lettore { width: 100%; }
+  .l-barra { padding: calc(8px + env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) 8px max(18px, env(safe-area-inset-left, 0px)); }
+  .l-corpo { padding: 0 max(18px, env(safe-area-inset-right, 0px)) calc(40px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); gap: 16px; }
+  .l-corpo > .foto { aspect-ratio: 4 / 3; border-radius: 0; margin-left: calc(-1 * max(18px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(18px, env(safe-area-inset-right, 0px))); max-width: none; }
+  .l-corpo > .credito { margin-top: -8px; }
+  .l-corpo h2 { font-size: clamp(1.65rem, 7.4vw, 2rem); }
+  .l-semplice { font-size: 1.125rem; line-height: 1.6; }
+  .dati { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .dati li { padding: 14px 12px; }
+  .fonte .btn { align-self: stretch; }
   .l-nav { grid-template-columns: minmax(0, 1fr); }
   .l-nav a:last-child { text-align: left; }
+  .piede-in { padding-block: 32px calc(40px + env(safe-area-inset-bottom, 0px)); }
+  .su { width: 48px; height: 48px; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (hover: none) {
+  .mini:hover { transform: none; box-shadow: none; }
+  .card:hover .foto img, .lead:hover > .foto img, .lead > .foto img { transform: none; }
+  .card:hover h3 { text-decoration: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; animation: none !important; }
@@ -344,7 +401,7 @@ button { font: inherit; color: inherit; }
       <div class="lato">
         <div class="chi">
           <h2>La scienza di oggi, spiegata semplice.</h2>
-          <p>Ogni mattina scegliamo le scoperte nuove di biologia, animali, piante, fisica e spazio. Prima le spieghiamo con parole di tutti i giorni, poi trovi numeri, metodi e lo studio originale.</p>
+          <p>Ogni mattina scegliamo le scoperte nuove di biologia, animali, piante, geologia, fisica e spazio. Prima le spieghiamo con parole di tutti i giorni, poi trovi numeri, metodi e lo studio originale.</p>
           <ul class="numeri" id="numeri"></ul>
         </div>
         <div id="mini" style="display:contents"></div>
@@ -445,13 +502,15 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
     bio: { nome: "Biologia", forma: "cellula" },
     eto: { nome: "Comportamento animale", forma: "cellula" },
     veg: { nome: "Piante", forma: "foglia" },
+    geo: { nome: "Geologia", forma: "strati" },
     fis: { nome: "Fisica", forma: "onda" },
     ast: { nome: "Spazio", forma: "orbita" }
   };
-  var ORDINE = ["bio", "eto", "veg", "fis", "ast"];
+  var ORDINE = ["bio", "eto", "veg", "geo", "fis", "ast"];
   var FORME = {
     cellula: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="40"/><circle cx="58" cy="44" r="14"/><circle cx="34" cy="64" r="4"/><circle cx="66" cy="70" r="3"/><circle cx="30" cy="38" r="2.5"/></svg>',
     foglia: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M50 8C80 30 82 70 50 92 18 70 20 30 50 8Z"/><path d="M50 18v72M50 40l-14-10M50 40l14-10M50 58l-18-12M50 58l18-12M50 75l-14-9M50 75l14-9"/></svg>',
+    strati: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 58 36 20l15 21 10-12 31 29"/><path d="M8 58h84M8 71c14-6 28 6 42 0s28 6 42 0M8 84c14-6 28 6 42 0s28 6 42 0"/><path d="m36 20 4 14-7 8"/></svg>',
     onda: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="40"/><path d="M14 50c6-18 12-18 18 0s12 18 18 0 12-18 18 0 12 18 18 0"/><path d="M14 50h72" stroke-dasharray="2 4"/></svg>',
     orbita: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="50" cy="50" r="9"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(-24 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(36 50 50)"/><circle cx="88" cy="38" r="3"/><circle cx="22" cy="80" r="2.5"/></svg>'
   };
@@ -474,7 +533,12 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
   function dom(v) { return DOMINI[v.dominio] ? v.dominio : "bio"; }
   function tinta(k) { return "--tinta:var(--d-" + k + ")"; }
   function eNature(v) { return /\bnature\b/i.test(strip(v.fonte && v.fonte.rivista)); }
-  function ordina(a, b) { return a.data < b.data ? 1 : a.data > b.data ? -1 : 0; }
+  var GIORNO = 86400000;
+  function giornoDi(iso) { var p = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || "")); return p ? Date.UTC(+p[1], +p[2] - 1, +p[3]) / GIORNO : 0; }
+  function chiave(v) { return v.aggiunta && v.aggiunta > v.data ? v.aggiunta : v.data; }
+  function ordina(a, b) { var x = chiave(a), y = chiave(b); return x < y ? 1 : x > y ? -1 : a.data < b.data ? 1 : a.data > b.data ? -1 : 0; }
+  var ANNO = String(new Date().getFullYear());
+  function riscoperta(v) { return !!v.aggiunta && giornoDi(v.aggiunta) - giornoDi(v.data) > 30; }
   function titoloDi(v) { return tipo(v.titolo_semplice || v.titolo); }
 
   var TUTTE = ARCH.voci.filter(function (v) { return !NASCOSTE[v.id] && v.semplice; }).sort(ordina);
@@ -518,7 +582,8 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
   /* ---------- pezzi ---------- */
   function metaHTML(v, anno) {
     var k = dom(v);
-    return '<p class="meta"><span class="dom">' + DOMINI[k].nome + '</span><span class="data">' + dataLunga(v.data, anno) + "</span>" +
+    return '<p class="meta"><span class="dom">' + DOMINI[k].nome + '</span><span class="data">' + dataLunga(v.data, anno || String(v.data).slice(0, 4) !== ANNO) + "</span>" +
+      (riscoperta(v) ? '<span class="nat">da riscoprire</span>' : "") +
       (eNature(v) ? '<span class="nat">da <i>Nature</i></span>' : "") + "</p>";
   }
   function carta(v, extra) {
@@ -549,7 +614,7 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
       "<li><b>" + TUTTE.length + "</b><span>notizie</span></li>" +
       "<li><b>" + Object.keys(materie).length + "</b><span>materie</span></li>" +
       "<li><b>" + TUTTE.filter(eNature).length + "</b><span>da <i>Nature</i></span></li>";
-    document.getElementById("aggiornato").innerHTML = "Aggiornato il " + dataLunga(ARCH.aggiornato, true) + "<br>Notizia più recente: " + dataLunga(v.data, true) +
+    document.getElementById("aggiornato").innerHTML = "Aggiornato il " + dataLunga(ARCH.aggiornato, true) + "<br>Notizia più recente: " + dataLunga(TUTTE.reduce(function (m, x) { return x.data > m ? x.data : m; }, ""), true) +
       (primo ? "<br>Archivio dal " + dataLunga(primo.data, true) : "");
   }
 
@@ -563,15 +628,13 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
   }
 
   /* ---------- una per materia ---------- */
-  var GIORNO = 86400000;
-  function giornoDi(iso) { var p = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || "")); return p ? Date.UTC(+p[1], +p[2] - 1, +p[3]) / GIORNO : 0; }
   function oggi() { var d = new Date(); return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / GIORNO; }
   function renderMaterie() {
     var g = oggi();
     var h = ORDINE.map(function (k, j) {
       var tutte = TUTTE.filter(function (v) { return v.dominio === k; });
       if (!tutte.length) return "";
-      var v, nuova = g - giornoDi(tutte[0].data) <= 3;
+      var v, nuova = g - giornoDi(chiave(tutte[0])) <= 3;
       if (nuova) v = tutte[0];
       else {
         var vecchie = tutte.filter(function (x) { return g - giornoDi(x.data) > 14; });
@@ -579,10 +642,11 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
         v = vecchie[(g * 7 + j * 13) % vecchie.length];
       }
       var extra = '<p class="meta"><span class="dom">' + DOMINI[k].nome + "</span>" +
-        (nuova ? '<span class="etichetta nuova">NUOVA</span>' : '<span class="etichetta vecchia">ARCHIVIO · ' + dataLunga(v.data).toUpperCase() + "</span>") + "</p>";
+        (nuova ? '<span class="etichetta nuova">' + (riscoperta(v) ? "DA RISCOPRIRE" : "NUOVA") + "</span>" : '<span class="etichetta vecchia">ARCHIVIO · ' + dataLunga(v.data).toUpperCase() + "</span>") + "</p>";
       return carta(v, extra);
     }).join("");
-    var el = document.getElementById("materie"); el.innerHTML = h; osserva(el);
+    var el = document.getElementById("materie"); el.innerHTML = h;
+    el.style.setProperty("--col", el.children.length); el.setAttribute("data-n", el.children.length); osserva(el);
   }
 
   /* ---------- Nature ---------- */
@@ -672,8 +736,8 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
       '<div class="fonte"><strong>' + (f.rivista || "Fonte") + "</strong>" + (f.rif ? "<span>" + f.rif + "</span>" : "") +
       (f.url ? '<a class="btn btn-pieno" href="' + attr(f.url) + '" target="_blank" rel="noopener">Leggi la fonte ' + ESTERNO + "</a>" : "") + "</div></section>" +
       ((nb.prec || nb.succ) ? '<nav class="l-nav" aria-label="Altre notizie">' +
-        (nb.prec ? '<a href="#' + attr(nb.prec.id) + '"><small>← Più recente</small><span>' + titoloDi(nb.prec) + "</span></a>" : "<span></span>") +
-        (nb.succ ? '<a href="#' + attr(nb.succ.id) + '"><small>Meno recente →</small><span>' + titoloDi(nb.succ) + "</span></a>" : "") + "</nav>" : "");
+        (nb.prec ? '<a href="#' + attr(nb.prec.id) + '"><small>← Precedente</small><span>' + titoloDi(nb.prec) + "</span></a>" : "<span></span>") +
+        (nb.succ ? '<a href="#' + attr(nb.succ.id) + '"><small>Successiva →</small><span>' + titoloDi(nb.succ) + "</span></a>" : "") + "</nav>" : "");
     document.getElementById("l-scorri").scrollTop = 0;
     if (!dlg.open) { try { dlg.showModal(); } catch (e) { dlg.setAttribute("open", ""); } }
     document.title = strip(t) + " · Vita e Materia";
@@ -735,11 +799,30 @@ Promise.all(["dati/archivio.json", "dati/foto.json"].map(function (u) {
     var scuro = root.getAttribute("data-theme") ? root.getAttribute("data-theme") === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
     var nuovo = scuro ? "light" : "dark"; root.setAttribute("data-theme", nuovo);
     try { localStorage.setItem("vm-tema", nuovo); } catch (e) {}
+    coloreTema();
   });
+  function coloreTema() {
+    var c = getComputedStyle(root).getPropertyValue("--bg").trim(); if (!c) return;
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function (m) { m.removeAttribute("media"); m.setAttribute("content", c); });
+  }
+  coloreTema();
+  try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", coloreTema); } catch (e) {}
   var testata = document.getElementById("testata"), su = document.getElementById("su"), tick = false;
+  var riga = testata.querySelector(".testata-riga"), campo = document.getElementById("cerca"), ultimaY = window.scrollY;
+  function misura() { testata.style.setProperty("--riga", riga.offsetHeight + "px"); }
+  misura(); window.addEventListener("resize", misura);
+  campo.addEventListener("focus", function () { testata.classList.remove("compatta"); });
   window.addEventListener("scroll", function () {
     if (tick) return; tick = true;
-    requestAnimationFrame(function () { var y = window.scrollY; testata.classList.toggle("scorsa", y > 8); su.classList.toggle("visibile", y > 1000); tick = false; });
+    requestAnimationFrame(function () {
+      var y = window.scrollY, giu = y > ultimaY + 6, insu = y < ultimaY - 6;
+      testata.classList.toggle("scorsa", y > 8); su.classList.toggle("visibile", y > 1000);
+      /* sul telefono, scorrendo in giu resta solo la riga delle materie */
+      if (y < 120 || insu) testata.classList.remove("compatta");
+      else if (giu && document.activeElement !== campo) testata.classList.add("compatta");
+      if (giu || insu) ultimaY = y;
+      tick = false;
+    });
   }, { passive: true });
   su.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: RIDOTTO ? "auto" : "smooth" }); });
 
